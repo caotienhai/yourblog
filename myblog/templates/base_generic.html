@@ -1,44 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  {% block title %}<title>My Blog</title>{% endblock %}
+  {% load static %}
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favico.png' %}" />
+  {% block title %}<title id = "title">Make world freshed</title>{% endblock %}
+  <meta name="Keywords" content="">
+  <meta name="Description" content="Freely talks about what people can do to make the world better, or simply to make the earth healthier, or just make things around us more friendly">
+  <meta property="og:type" content="website">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-  <!-- Add additional CSS in static file -->
-  {% load static %}
+  <!-- Add additional CSS in static file -->  
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
 
-<div class="container-fluid">
+  <div class="wrap wrap-fluid">
+    <div id="top-navbar" class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="#"><img id="logo" height="40px" width="auto" src="{% static 'images/vinfish_logo.png' %}"></a>          
+        </div>
 
-<div class="row">
-  <div class="col-sm-2">
-  {% block sidebar %}
-  <ul class="sidebar-nav">
-    <li><a href="{% url 'index' %}">Home</a></li>
-    <li><a href="{% url 'blogs' %}">All blogs</a></li>
-    <li><a href="{% url 'bloggers' %}">All bloggers</a></li>
-  </ul>
-  
-  <ul class="sidebar-nav">
-   {% if user.is_authenticated %}
-     <li>User: {{ user.get_username }}</li>
-     <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
-   {% else %}
-     <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
-   {% endif %} 
-  </ul>
- 
-  {% endblock %}
+        <div class="navbar-collapse collapse">
+          <ul class="logon-block nav navbar-nav nav-list navbar-left u-unstyled" style="font-size: 14px;">
+            <li><a class="active" href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'blogs' %}">All blogs</a></li>
+            <li><a href="{% url 'bloggers' %}">All bloggers</a></li>
+          </ul>
+
+          <ul class="logon-block nav navbar-nav nav-list navbar-right u-unstyled" style="font-size: 14px;">
+            {% if user.is_authenticated %}
+              <li>User: {{ user.get_username }}</li>
+              <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+            {% else %}
+              <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+            {% endif %}
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
   </div>
-  <div class="col-sm-10 ">
-  {% block content %}{% endblock %}
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2">
+        {% block sidebar %}
+        <ul class="sidebar-nav">
+          <li><a href="{% url 'index' %}">Home</a></li>
+          <li><a href="{% url 'blogs' %}">All blogs</a></li>
+          <li><a href="{% url 'bloggers' %}">All bloggers</a></li>
+        </ul>
+  
+        <ul class="sidebar-nav">
+          {% if user.is_authenticated %}
+              <li>User: {{ user.get_username }}</li>
+              <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>   
+            {% else %}
+              <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>   
+            {% endif %}
+        </ul>  
+ 
+        {% endblock %}
+      </div>
+    <div class="col-sm-10 ">
+  {% block content %}
+  {% endblock %}
   
   {% block pagination %}
     {% if is_paginated %}
@@ -58,9 +89,33 @@
     {% endif %}
   {% endblock %} 
   
-  </div>
-</div>
+      </div>
+    </div>
 
-</div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div id="footer-links" class="footer-inline col-sm-12 pull-right">
+          <div style="white-space: nowrap; float: left; text-align: left;">
+            <div class="row">
+              <div class="col-sm-3">
+                <a href="https://facebook.com/Van.Phan.Fish.Sause" rel="noreferrer" target="_blank" style="margin-right: 10px;">
+                  <svg x="0px" y="0px" viewBox="0 0 112.2 112.2" style="width: 24px;">
+                    <circle fill="#3B5998" cx="56.1" cy="56.1" r="55"></circle>
+                    <path fill="#FFFFFF" d="M73.5,31.6h-9.1c-1.4,0-3.6,0.8-3.6,3.9v8.5h12.6L72,58.3H60.8v40.8H43.9V58.3h-8V43.9h8v-9.2
+        	c0-6.7,3.1-17,17-17h12.5v13.9H73.5z"></path>
+                  </svg><span style="position: relative;top: -7px;margin-left: 5px;">Facebook</span>
+                  </svg>
+                </a>
+              </div>
+              <div class="copy pull-right">&copy; 2021 Vinfish-All Rights Reserved</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </body>
 </html>

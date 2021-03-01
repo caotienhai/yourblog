@@ -3,3 +3,21 @@
     padding: 0;
     list-style: none;
 }
+
+.navbar-inverse {
+    margin-bottom: 0;  
+    padding: 0;    
+    border-color: lightgray;   
+    background: rgb(14, 146, 228);
+    overflow: hidden;
+}
+
+#top-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+}
+
+.navbar-header {
+    padding-right: 25px;
+}
